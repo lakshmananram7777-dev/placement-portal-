@@ -87,21 +87,32 @@ pipeline {
         }
     }
 
+   
     post {
         failure {
-            script {
-                if (env.DEPLOYMENT_STARTED == 'true') {
-                    echo 'Deployment failed. Rolling back to the previous release.'
+            echo 'Pipeline failed. Checking Kubernetes deployment...'
 
-                    withCredentials([
-                        file(credentialsId: env.KUBE_CRED, variable: 'KUBECONFIG_FILE')
-                    ]) {
-                        bat 'set KUBECONFIG=%KUBECONFIG_FILE% && kubectl rollout undo deployment/placement-portal'
-                        bat 'set KUBECONFIG=%KUBECONFIG_FILE% && kubectl rollout status deployment/placement-portal --timeout=60s'
-                        bat 'set KUBECONFIG=%KUBECONFIG_FILE% && kubectl get pods'
+            withCredentials([
+                file(credentialsId: env.KUBE_CRED, variable: 'KUBECONFIG_FILE')
+            ]) {
+                script {
+                    bat(
+                        returnStatus: true,
+                        script: 'set KUBECONFIG=%KUBECONFIG_FILE% && kubectl rollout status deployment/placement-portal --timeout=10s'
+                    )
+
+                    def rolloutStatus = bat(
+                        returnStatus: true,
+                        script: 'set KUBECONFIG=%KUBECONFIG_FILE% && kubectl get deployment placement-portal -o jsonpath="{.status.availableReplicas}"'
+                    )
+
+                    if (rolloutStatus != 0) {
+                        echo 'Could not check deployment status.'
                     }
-                } else {
-                    echo 'Failure before deployment. No rollback required.'
+
+                    bat 'set KUBECONFIG=%KUBECONFIG_FILE% && kubectl rollout undo deployment/placement-portal'
+                    bat 'set KUBECONFIG=%KUBECONFIG_FILE% && kubectl rollout status deployment/placement-portal --timeout=60s'
+                    bat 'set KUBECONFIG=%KUBECONFIG_FILE% && kubectl get pods'
                 }
             }
         }
@@ -110,4 +121,3 @@ pipeline {
             echo 'Deployment successful.'
         }
     }
-}
