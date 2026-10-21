@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>University Placement Portal</title>
+<style>
+  :root{--ink:#101a2c;--bg:#eef2f6;--card:#fff;--blue:#2b4fd8;--amber:#f0a202;--muted:#5b6678;--line:#d5dce6}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Segoe UI",Tahoma,sans-serif;background:var(--bg);color:var(--ink);line-height:1.55}
+  header{background:var(--ink);color:#fff;padding:48px 24px 40px}
+  header .wrap,main,footer{max-width:1040px;margin:0 auto}
+  h1{font-size:2.4rem;margin:0 0 8px;letter-spacing:-.5px}
+  header p{margin:0;color:#b9c4d8;max-width:60ch}
+  nav{background:var(--blue)}
+  nav .wrap{max-width:1040px;margin:0 auto;display:flex;gap:24px;padding:12px 24px;flex-wrap:wrap}
+  nav a{color:#fff;text-decoration:none;font-weight:600}
+  nav a:hover,nav a:focus-visible{text-decoration:underline}
+  main{padding:32px 24px}
+  section{margin-bottom:48px}
+  h2{font-size:1.5rem;margin:0 0 16px;border-left:6px solid var(--amber);padding-left:12px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:18px}
+  .card h3{margin:0 0 4px;font-size:1.05rem}
+  .muted{color:var(--muted);font-size:.92rem}
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:16px}
+  .stat{background:var(--ink);color:#fff;border-radius:6px;padding:20px}
+  .stat b{display:block;font-size:2rem;color:var(--amber)}
+  table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line)}
+  th,td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--line)}
+  th{background:#e3e9f2}
+  .table-scroll{overflow-x:auto}
+  .tag{display:inline-block;background:#e3e9f2;border-radius:3px;padding:2px 8px;font-size:.8rem;margin-right:4px}
+  .open{color:#0a7a3d;font-weight:600}
+  .soon{color:#b36b00;font-weight:600}
+  footer{padding:24px;color:var(--muted);border-top:1px solid var(--line)}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <h1>University Placement Portal</h1>
+  <p>Browse companies, check eligibility, track placement statistics and never miss a recruitment drive.</p>
+  <p class="muted" style="margin-top:8px">Version 1.0</p>
+</div></header>
+<nav><div class="wrap">
+  <a href="#stats">Statistics</a><a href="#companies">Companies</a>
+  <a href="#drives">Recruitment drives</a><a href="#students">Student profiles</a>
+</div></nav>
+
+<main>
+<section id="stats">
+  <h2>Placement statistics 2025-26</h2>
+  <div class="stats">
+    <div class="stat"><b>92%</b>Students placed</div>
+    <div class="stat"><b>48 LPA</b>Highest package</div>
+    <div class="stat"><b>8.4 LPA</b>Average package</div>
+    <div class="stat"><b>120+</b>Recruiting companies</div>
+  </div>
+</section>
+
+<section id="companies">
+  <h2>Company information</h2>
+  <div class="grid">
+    <div class="card"><h3>TechNova Systems</h3><p class="muted">Software engineering, cloud and DevOps roles.</p>
+      <span class="tag">CGPA 7.0+</span><span class="tag">CSE / IT</span><p class="muted">Package: 10-14 LPA</p></div>
+    <div class="card"><h3>DataBridge Analytics</h3><p class="muted">Data analyst and ML engineer positions.</p>
+      <span class="tag">CGPA 7.5+</span><span class="tag">CSE / ECE</span><p class="muted">Package: 9-12 LPA</p></div>
+    <div class="card"><h3>CloudPeak Labs</h3><p class="muted">Site reliability and platform engineering.</p>
+      <span class="tag">CGPA 7.0+</span><span class="tag">No active arrears</span><p class="muted">Package: 12-18 LPA</p></div>
+    <div class="card"><h3>BuildWell Infra</h3><p class="muted">Graduate engineer trainee programme.</p>
+      <span class="tag">CGPA 6.5+</span><span class="tag">Civil / Mech</span><p class="muted">Package: 5-7 LPA</p></div>
+  </div>
+</section>
+
+<section id="drives">
+  <h2>Upcoming recruitment drives</h2>
+  <div class="table-scroll"><table>
+    <tr><th>Company</th><th>Date</th><th>Venue</th><th>Registration</th></tr>
+    <tr><td>TechNova Systems</td><td>12 Nov 2026</td><td>Main Auditorium</td><td class="open">Open</td></tr>
+    <tr><td>DataBridge Analytics</td><td>19 Nov 2026</td><td>Seminar Hall 2</td><td class="open">Open</td></tr>
+    <tr><td>CloudPeak Labs</td><td>03 Dec 2026</td><td>Online</td><td class="soon">Opens 20 Nov</td></tr>
+    <tr><td>BuildWell Infra</td><td>10 Dec 2026</td><td>Placement Cell</td><td class="soon">Opens 25 Nov</td></tr>
+  </table></div>
+</section>
+
+<section id="students">
+  <h2>Student profiles</h2>
+  <div class="grid">
+    <div class="card"><h3>Aarav Menon</h3><p class="muted">B.Tech CSE | CGPA 9.1</p><span class="tag">Docker</span><span class="tag">Java</span><span class="tag">Kubernetes</span></div>
+    <div class="card"><h3>Priya Raman</h3><p class="muted">B.Tech IT | CGPA 8.8</p><span class="tag">Python</span><span class="tag">ML</span><span class="tag">SQL</span></div>
+    <div class="card"><h3>Karthik Subramanian</h3><p class="muted">B.Tech ECE | CGPA 8.2</p><span class="tag">Embedded C</span><span class="tag">IoT</span></div>
+  </div>
+</section>
+</main>
+<footer>University Placement Cell | placement@university.edu</footer>
+</body>
+</html>
