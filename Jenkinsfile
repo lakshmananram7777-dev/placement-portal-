@@ -49,7 +49,7 @@ pipeline {
 
         stage('Deploy to Kubernetes') {
             steps {
-                withCredentials([file(credentialsId: env.KUBE_CRED, variableId: 'KUBECONFIG_FILE')]) {
+                withCredentials([file(credentialsId: env.KUBE_CRED, variable: 'KUBECONFIG_FILE')]) {
                     bat 'set KUBECONFIG=%KUBECONFIG_FILE% && kubectl apply -f deployment.yaml'
                     bat 'set KUBECONFIG=%KUBECONFIG_FILE% && kubectl set image deployment/placement-portal placement-portal=%IMAGE_NAME%:%IMAGE_TAG%'
                 }
@@ -58,7 +58,7 @@ pipeline {
 
         stage('Verify Rollout') {
             steps {
-                withCredentials([file(credentialsId: env.KUBE_CRED, variableId: 'KUBECONFIG_FILE')]) {
+                withCredentials([file(credentialsId: env.KUBE_CRED, variable: 'KUBECONFIG_FILE')]) {
                     bat 'set KUBECONFIG=%KUBECONFIG_FILE% && kubectl rollout status deployment/placement-portal --timeout=60s'
                     bat 'set KUBECONFIG=%KUBECONFIG_FILE% && kubectl get pods'
                 }
@@ -69,7 +69,7 @@ pipeline {
     post {
         failure {
             echo 'Rollout failed. Rolling back to the previous stable release...'
-            withCredentials([file(credentialsId: env.KUBE_CRED, variableId: 'KUBECONFIG_FILE')]) {
+            withCredentials([file(credentialsId: env.KUBE_CRED, variable: 'KUBECONFIG_FILE')]) {
                 bat 'set KUBECONFIG=%KUBECONFIG_FILE% && kubectl rollout undo deployment/placement-portal'
                 bat 'set KUBECONFIG=%KUBECONFIG_FILE% && kubectl rollout status deployment/placement-portal --timeout=60s'
                 bat 'set KUBECONFIG=%KUBECONFIG_FILE% && kubectl get pods'
