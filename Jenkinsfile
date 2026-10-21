@@ -16,7 +16,8 @@ pipeline {
     stages {
         stage('Clone Code') {
             steps {
-                git branch: 'main', url: 'git git 'https://github.com/lakshmananram7777-dev/placement-portal-.git'
+                git branch: 'main',
+    url: 'https://github.com/lakshmananram7777-dev/placement-portal-.git'
             }
         }
 
